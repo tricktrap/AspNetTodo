@@ -114,7 +114,10 @@ namespace TodoApi.Tests
 		}
 		
 
-/*		
+		// wake this code up in the future when this page has real content in it
+		// https://docs.asp.net/projects/mvc/en/latest/controllers/testing.html
+		// https://github.com/aspnet/Docs/issues/123
+		#if false
 		[Fact]
 		public void TestGet() 
 		{	
@@ -122,24 +125,19 @@ namespace TodoApi.Tests
 			repo.Add(new TodoItem() { Name="FindMe", IsComplete=false});
 			var controller = GetController(repo);
 			
-			
 			// Make sure we DON'T get back the result.
-		 	var result = controller.GetById("7") as HttpNotFoundObjectResult;
-			
-			Assert.NotNull(result); 
+		 	var result = controller.GetById("7") as ActionResult;
 			result.ExecuteResult(new ActionContext());
-			
-			Assert.Equal(StatusCodes.Status404NotFound, result.StatusCode);
-			
+			Assert.NotNull(result); 
 			
 			var goodResult = controller.GetById("1") as ObjectResult;
 			goodResult.ExecuteResult(new ActionContext());
-			Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+			Assert.Equal(StatusCodes.Status200OK, goodResult.StatusCode);
 			TodoItem item = goodResult.Value as TodoItem;
 			Assert.Equal("1", item.Key);
 			Assert.Equal("FindMe", item.Name);
 			Assert.False(item.IsComplete);	
 		}
-		*/
+		#endif
 	}
 }
