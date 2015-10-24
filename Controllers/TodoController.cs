@@ -27,6 +27,18 @@ namespace TodoApi.Controllers
 			}
 			return new ObjectResult(item);
 		}
+		
+		[HttpPost]
+		public IActionResult Create([FromBody] TodoItem item)
+		{
+			if (item == null) {
+				return HttpBadRequest();
+			}
+			
+			TodoItems.Add(item);
+			
+			return CreatedAtRoute("GetTodo", new {controller = "Todo", id = item.Key }, item);
+		}
 	}
 	
 }
